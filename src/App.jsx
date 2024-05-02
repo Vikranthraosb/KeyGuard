@@ -1,11 +1,13 @@
 import React from "react";
 import Navbar from "./Components/Navbar";
+import Manager from "./Components/Manager";
 
 function App() {
   return (
-    <div className="text-black">
+    <>
       <Navbar />
-    </div>
+      <Manager />
+    </>
   );
 }
 
