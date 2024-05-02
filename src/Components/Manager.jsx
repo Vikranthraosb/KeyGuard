@@ -1,7 +1,14 @@
 import React from "react";
-import { BiShow } from "react-icons/bi";
+import { IoEye } from "react-icons/io5";
+import { useRef } from "react";
 
 function Manager() {
+  const ref = useRef();
+
+  const showpassword = () => {
+    alert("show password");
+    ref;
+  };
   return (
     <div>
       <div class="absolute inset-0 -z-10 w-full h-full bg-gray-900 bg-[linear-gradient(to_right,#ff00ff1a_1px,transparent_1px),linear-gradient(to_bottom,#ff00ff1a_1px,transparent_1px)] bg-[size:14px_24px]">
@@ -17,7 +24,7 @@ function Manager() {
         <p className="text-zinc-300 text-xl text-center capitalize font-semibold">
           Your Own Password Manager
         </p>
-        <div className=" flex flex-col p-4 text-black gap-4 justify-around">
+        <div className=" flex flex-col p-4 text-black gap-2 justify-around">
           <input
             className="rounded-full border-[2px] border-green-800 w-full py-1 px-4"
             type="text"
@@ -44,7 +51,17 @@ function Manager() {
                 id=""
                 placeholder="Enter Password."
               />
-              <BiShow className="w-[7vw] h-[3vw] text-white" />
+              <span
+                ref={ref}
+                className="bg-red-500 h-10 flex items-center justify-center"
+              >
+                <img
+                  src="/images/show-password.png"
+                  alt=""
+                  className="block object-contain"
+                  style={{ height: "160%" }} // Adjust the height as needed
+                />
+              </span>
             </div>
           </div>
           <div className="w-full flex justify-center items-center">
