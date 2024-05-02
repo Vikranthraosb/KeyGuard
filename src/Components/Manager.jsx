@@ -1,4 +1,5 @@
 import React from "react";
+import { BiShow } from "react-icons/bi";
 
 function Manager() {
   return (
@@ -22,23 +23,32 @@ function Manager() {
             type="text"
             name=""
             id=""
+            placeholder="Enter Website URL."
           />
           <div className="flex w-full justify-between gap-6">
-            <input
-              className="rounded-full border-[2px] border-green-800 w-full py-1 px-4"
-              type="text"
-              name=""
-              id=""
-            />
-            <input
-              className="rounded-full  border-[2px] border-green-600 w-full py-1 px-4"
-              type="text"
-              name=""
-              id=""
-            />
+            <div className="w-1/2 flex justify-center items-center">
+              <input
+                className="rounded-full border-[2px] border-green-800 w-full py-1 px-4"
+                type="text"
+                name=""
+                id=""
+                placeholder="Enter Username."
+              />
+            </div>
+
+            <div className="flex items-center justify-start w-1/2 gap-2">
+              <input
+                className="rounded-full  border-[2px] border-green-600 w-full py-1 px-4"
+                type="text"
+                name=""
+                id=""
+                placeholder="Enter Password."
+              />
+              <BiShow className="w-[7vw] h-[3vw] text-white" />
+            </div>
           </div>
           <div className="w-full flex justify-center items-center">
-            <button className="uppercase text-white font-semibold border-[1.8px] border-zinc-500 py-1 px-1 rounded-xl flex justify-center items-center gap-2 hover:text-zinc-400 hover:border-zinc-300 transition-all duration-1000 ease-in-out">
+            <button className="uppercase text-white font-semibold border-[1.8px] border-zinc-500 py-1 px-1 rounded-xl flex justify-center items-center gap-2 hover:text-zinc-500 hover:border-zinc-200 transition-all duration-[.75s] ease-in-out">
               <lord-icon
                 src="https://cdn.lordicon.com/jgnvfzqg.json"
                 trigger="hover"
