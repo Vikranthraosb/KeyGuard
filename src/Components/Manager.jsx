@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRef } from "react";
 import { useState } from "react";
 
 function Manager() {
   const [form, setform] = useState({ site: "", username: "", password: "" });
   const ref = useRef();
+  const [passwordArray, setpasswordArray] = useState([]);
 
+  useEffect(() => {
+    let passwords = localStorage.getItem("passwords");
+    if (passwords) {
+      setpasswordArray(JSON.parse(passwords));
+    }
+  }, []);
   const showpassword = () => {
     // toggle the eye image
     if (ref.current.src.includes("/images/hide-password.png")) {
@@ -15,7 +22,15 @@ function Manager() {
     }
   };
 
-  const savepassword = () => {};
+  const savepassword = () => {
+    console.log(form);
+    setpasswordArray([...passwordArray, form]);
+    localStorage.setItem("password", JSON.stringify([...passwordArray, form]));
+  };
+  const handlechange = (e) => {
+    setform({ ...form, [e.target.name]: e.target.value });
+  };
+
   return (
     <div>
       <div className="absolute inset-0 -z-10 w-full h-full bg-gray-900 bg-[linear-gradient(to_right,#ff00ff1a_1px,transparent_1px),linear-gradient(to_bottom,#ff00ff1a_1px,transparent_1px)] bg-[size:14px_24px]">
@@ -33,31 +48,33 @@ function Manager() {
         </p>
         <div className=" flex flex-col p-4 text-black gap-2 justify-around">
           <input
+            onChange={handlechange}
             value={form.site}
             className="rounded-full border-[2px] border-green-800 w-full py-1 px-4"
             type="text"
-            name=""
+            name="site"
             id=""
             placeholder="Enter Website URL."
           />
           <div className="flex w-full justify-between gap-6">
             <div className="w-1/2 flex justify-center items-center">
               <input
+                onChange={handlechange}
                 value={form.username}
                 className="rounded-full border-[2px] border-green-800 w-full py-1 px-4"
                 type="text"
-                name=""
+                name="username"
                 id=""
                 placeholder="Enter Username."
               />
             </div>
-
             <div className="flex items-center justify-around w-1/2 gap-0">
               <input
+                onChange={handlechange}
                 value={form.password}
                 className="rounded-full  border-[2px] border-green-600 w-full py-1 px-4"
                 type="text"
-                name=""
+                name="password"
                 id=""
                 placeholder="Enter Password."
               />
@@ -86,6 +103,57 @@ function Manager() {
               Add Password
             </button>
           </div>
+        </div>
+        <div className="passwords">
+          <h2 className="text-xl text-center uppercase text-white font-semibold mt-4 mb-3">
+            {" "}
+            Your passwords :
+          </h2>
+          {passwordArray.length === 0 && <div>No password to show</div>}
+          <table className="table-auto w-full overflow-hidden rounded-2xl">
+            <thead className=" bg-green-800  bg-opacity-[.25] text-white">
+              <tr>
+                <th className="py-2">Song</th>
+                <th className="py-2">Artist</th>
+                <th className="py-2">Year</th>
+              </tr>
+            </thead>
+            <tbody className="bg-green-200 bg-opacity-[.1]">
+              <tr>
+                <td className="text-center min-w-32 text-white px-1 py-3">
+                  The SlidingÜ Mr. Bones (Next Stop, Pottersville)
+                </td>
+                <td className="text-center min-w-32 text-white px-1 py-3">
+                  Malcolm Lockyer
+                </td>
+                <td className="text-center min-w-32 text-white px-1 py-3">
+                  1961
+                </td>
+              </tr>
+              <tr>
+                <td className="text-center min-w-32 text-white px-1 py-3">
+                  Witchy Woman
+                </td>
+                <td className="text-center min-w-32 text-white px-1 py-3">
+                  The Eagles
+                </td>
+                <td className="text-center min-w-32 text-white px-1 py-3">
+                  1972
+                </td>
+              </tr>
+              <tr>
+                <td className="text-center min-w-32 text-white px-1 py-3">
+                  Shining Star
+                </td>
+                <td className="text-center min-w-32 text-white px-1 py-3">
+                  Earth, Wind, and Fire
+                </td>
+                <td className="text-center min-w-32 text-white px-1 py-3">
+                  1975
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
