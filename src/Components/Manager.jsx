@@ -45,7 +45,7 @@ function Manager() {
           <input
             onChange={handlechange}
             value={form.site}
-            className="cursive rounded-full border-[2px] border-green-500 w-full py-1 px-4 bg-zinc-800"
+            className="cursive rounded-full border-[2px] border-green-500 w-full py-1 px-4 bg-zinc-800 text-zinc-300"
             type="text"
             name="site"
             id=""
@@ -56,7 +56,7 @@ function Manager() {
               <input
                 onChange={handlechange}
                 value={form.username}
-                className="cursive rounded-full border-[2px] border-green-600 w-full py-1 px-4 bg-zinc-800"
+                className="cursive rounded-full border-[2px] border-green-600 w-full py-1 px-4 bg-zinc-800 text-zinc-300"
                 type="text"
                 name="username"
                 id=""
@@ -67,7 +67,7 @@ function Manager() {
               <input
                 onChange={handlechange}
                 value={form.password}
-                className="cursive rounded-full  border-[2px] border-green-500 w-full py-1 px-4 bg-zinc-800"
+                className="cursive rounded-full  border-[2px] border-green-500 w-full py-1 px-4 bg-zinc-800 text-zinc-300"
                 type="text"
                 name="password"
                 id=""
@@ -118,40 +118,23 @@ function Manager() {
                   <th className="py-2">Password</th>
                 </tr>
               </thead>
+
               <tbody className="bg-green-200 bg-opacity-[.1]">
-                <tr>
-                  <td className="text-center min-w-32 text-white px-1 py-3">
-                    The SlidingÜ Mr. Bones (Next Stop, Pottersville)
-                  </td>
-                  <td className="text-center min-w-32 text-white px-1 py-3">
-                    Malcolm Lockyer
-                  </td>
-                  <td className="text-center min-w-32 text-white px-1 py-3">
-                    1961
-                  </td>
-                </tr>
-                <tr>
-                  <td className="text-center min-w-32 text-white px-1 py-3">
-                    Witchy Woman
-                  </td>
-                  <td className="text-center min-w-32 text-white px-1 py-3">
-                    The Eagles
-                  </td>
-                  <td className="text-center min-w-32 text-white px-1 py-3">
-                    1972
-                  </td>
-                </tr>
-                <tr>
-                  <td className="text-center min-w-32 text-white px-1 py-3">
-                    Shining Star
-                  </td>
-                  <td className="text-center min-w-32 text-white px-1 py-3">
-                    Earth, Wind, and Fire
-                  </td>
-                  <td className="text-center min-w-32 text-white px-1 py-3">
-                    1975
-                  </td>
-                </tr>
+                {passwordArray.map((item, index) => {
+                  return (
+                    <tr key={index}>
+                      <td className="text-center min-w-32 text-white px-1 py-3">
+                        {item.site}{" "}
+                      </td>
+                      <td className="text-center min-w-32 text-white px-1 py-3">
+                        {item.username}{" "}
+                      </td>
+                      <td className="text-center min-w-32 text-white px-1 py-3">
+                        {item.password}{" "}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           )}
