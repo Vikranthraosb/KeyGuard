@@ -124,7 +124,9 @@ function Manager() {
                   return (
                     <tr key={index}>
                       <td className="text-center min-w-32 text-white px-1 py-3">
-                        {item.site}{" "}
+                        <a href={item.site} target="_blank">
+                          {item.site}
+                        </a>
                       </td>
                       <td className="text-center min-w-32 text-white px-1 py-3">
                         {item.username}{" "}

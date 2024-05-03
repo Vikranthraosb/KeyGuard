@@ -6,3 +6,4 @@ export default {
   },
   plugins: [],
 };
+// use tailwind bg website for backround

@@ -3,4 +3,5 @@ export default {
     tailwindcss: {},
     autoprefixer: {},
   },
-}
+};
+// use tailwind bg website for backround
