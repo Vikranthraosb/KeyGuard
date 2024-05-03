@@ -38,19 +38,14 @@ function Manager() {
       </div>
       {/* backround is taken from - https://sinqi.tools/backgrounds . ( Darker version not properly working, so took lighter one and changed colors) */}
       <div className="mx-auto rounded-md max-w-4xl">
-        <h1 className="text-3xl text-center font-bold">
-          <span className="text-green-500">&lt;</span>{" "}
-          <span className="text-green-100">Passop/;</span>
-          <span className="text-green-500">&gt;</span>
-        </h1>
-        <p className="text-zinc-300 text-xl text-center capitalize font-semibold">
-          Your Own Password Manager
+        <p className="cursive text-zinc-400 text-2xl text-center uppercase font-semibold my-3">
+          Your Own Password Manager...
         </p>
         <div className=" flex flex-col p-4 text-black gap-2 justify-around">
           <input
             onChange={handlechange}
             value={form.site}
-            className="rounded-full border-[2px] border-green-800 w-full py-1 px-4"
+            className="cursive rounded-full border-[2px] border-green-500 w-full py-1 px-4 bg-zinc-800"
             type="text"
             name="site"
             id=""
@@ -61,7 +56,7 @@ function Manager() {
               <input
                 onChange={handlechange}
                 value={form.username}
-                className="rounded-full border-[2px] border-green-800 w-full py-1 px-4"
+                className="cursive rounded-full border-[2px] border-green-600 w-full py-1 px-4 bg-zinc-800"
                 type="text"
                 name="username"
                 id=""
@@ -72,7 +67,7 @@ function Manager() {
               <input
                 onChange={handlechange}
                 value={form.password}
-                className="rounded-full  border-[2px] border-green-600 w-full py-1 px-4"
+                className="cursive rounded-full  border-[2px] border-green-500 w-full py-1 px-4 bg-zinc-800"
                 type="text"
                 name="password"
                 id=""
@@ -105,55 +100,61 @@ function Manager() {
           </div>
         </div>
         <div className="passwords">
-          <h2 className="text-xl text-center uppercase text-white font-semibold mt-4 mb-3">
+          <h2 className="cursive text-lg text-center uppercase text-white font-semibold mt-8 mb-8">
             {" "}
             Your passwords :
           </h2>
-          {passwordArray.length === 0 && <div>No password to show</div>}
-          <table className="table-auto w-full overflow-hidden rounded-2xl">
-            <thead className=" bg-green-800  bg-opacity-[.25] text-white">
-              <tr>
-                <th className="py-2">Song</th>
-                <th className="py-2">Artist</th>
-                <th className="py-2">Year</th>
-              </tr>
-            </thead>
-            <tbody className="bg-green-200 bg-opacity-[.1]">
-              <tr>
-                <td className="text-center min-w-32 text-white px-1 py-3">
-                  The SlidingÜ Mr. Bones (Next Stop, Pottersville)
-                </td>
-                <td className="text-center min-w-32 text-white px-1 py-3">
-                  Malcolm Lockyer
-                </td>
-                <td className="text-center min-w-32 text-white px-1 py-3">
-                  1961
-                </td>
-              </tr>
-              <tr>
-                <td className="text-center min-w-32 text-white px-1 py-3">
-                  Witchy Woman
-                </td>
-                <td className="text-center min-w-32 text-white px-1 py-3">
-                  The Eagles
-                </td>
-                <td className="text-center min-w-32 text-white px-1 py-3">
-                  1972
-                </td>
-              </tr>
-              <tr>
-                <td className="text-center min-w-32 text-white px-1 py-3">
-                  Shining Star
-                </td>
-                <td className="text-center min-w-32 text-white px-1 py-3">
-                  Earth, Wind, and Fire
-                </td>
-                <td className="text-center min-w-32 text-white px-1 py-3">
-                  1975
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          {passwordArray.length === 0 && (
+            <div className="cursive text-white uppercase text-center text-4xl my-16 font-bold ">
+              No password to show !
+            </div>
+          )}
+          {passwordArray.length != 0 && (
+            <table className="table-auto w-full overflow-hidden rounded-2xl">
+              <thead className=" bg-green-800  bg-opacity-[.25] text-white">
+                <tr>
+                  <th className="py-2">Site</th>
+                  <th className="py-2">Username</th>
+                  <th className="py-2">Password</th>
+                </tr>
+              </thead>
+              <tbody className="bg-green-200 bg-opacity-[.1]">
+                <tr>
+                  <td className="text-center min-w-32 text-white px-1 py-3">
+                    The SlidingÜ Mr. Bones (Next Stop, Pottersville)
+                  </td>
+                  <td className="text-center min-w-32 text-white px-1 py-3">
+                    Malcolm Lockyer
+                  </td>
+                  <td className="text-center min-w-32 text-white px-1 py-3">
+                    1961
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-center min-w-32 text-white px-1 py-3">
+                    Witchy Woman
+                  </td>
+                  <td className="text-center min-w-32 text-white px-1 py-3">
+                    The Eagles
+                  </td>
+                  <td className="text-center min-w-32 text-white px-1 py-3">
+                    1972
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-center min-w-32 text-white px-1 py-3">
+                    Shining Star
+                  </td>
+                  <td className="text-center min-w-32 text-white px-1 py-3">
+                    Earth, Wind, and Fire
+                  </td>
+                  <td className="text-center min-w-32 text-white px-1 py-3">
+                    1975
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          )}
         </div>
       </div>
     </div>

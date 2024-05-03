@@ -4,10 +4,10 @@ import Manager from "./Components/Manager";
 
 function App() {
   return (
-    <>
+    <div className="p-[1px]">
       <Navbar />
       <Manager />
-    </>
+    </div>
   );
 }
 
