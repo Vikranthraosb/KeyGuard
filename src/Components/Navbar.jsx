@@ -3,8 +3,8 @@ import { FaGithub } from "react-icons/fa6";
 
 function Navbar() {
   return (
-    <nav className="navbar flex items-center justify-between px-3 py-2 pb-8 lg:pr-40 mb-16 lg:mb-8">
-      <div className="text-center font-bold text-2xl text-white ">
+    <nav className="navbar flex items-center justify-between px-3 py-2 pb-8 lg:pr-20 mb-16 lg:mb-8">
+      <div className="text-center font-bold text-2xl text-white lg:ml-8">
         {" "}
         <h1 className="lg:text-3xl text-center font-bold mb-2 text-xl pt-2">
           <span className="text-green-500">&lt;</span>{" "}
