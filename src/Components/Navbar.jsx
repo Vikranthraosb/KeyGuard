@@ -8,7 +8,7 @@ function Navbar() {
         {" "}
         <h1 className="lg:text-3xl text-center font-bold mb-2 text-xl pt-2">
           <span className="text-green-500">&lt;</span>{" "}
-          <span className="text-green-100">KeyGuard/;</span>
+          <span className="text-green-100">KeyGuard /</span>
           <span className="text-green-500">&gt;</span>
         </h1>
       </div>

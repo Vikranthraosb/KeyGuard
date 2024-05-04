@@ -1,10 +1,14 @@
 import React, { useEffect } from "react";
 import { useRef } from "react";
 import { useState } from "react";
+import { MdOutlineContentCopy } from "react-icons/md";
+import { PiCopyDuotone } from "react-icons/pi";
+import { ToastContainer, toast } from "react-toastify";
 
 function Manager() {
   const [form, setform] = useState({ site: "", username: "", password: "" });
   const ref = useRef();
+  const passwordref = useRef();
   const [passwordArray, setpasswordArray] = useState([]);
 
   useEffect(() => {
@@ -13,11 +17,31 @@ function Manager() {
       setpasswordArray(JSON.parse(passwords));
     }
   }, []);
+
+  const copytext = (text) => {
+    toast("🦄 Wow so easy!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+
+    navigator.clipboard.writeText(text);
+    // copy text to keyboard
+  };
+
   const showpassword = () => {
+    passwordref.current.type = "text";
     // toggle the eye image
     if (ref.current.src.includes("/images/hide-password.png")) {
       ref.current.src = "/images/show-password.png";
+      passwordref.current.type = "password";
     } else {
+      passwordref.current.type = "text";
       ref.current.src = "/images/hide-password.png";
     }
   };
@@ -32,7 +56,22 @@ function Manager() {
   };
 
   return (
-    <div className="">
+    <>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition="Bounce"
+      />
+      {/* Same as */}
+      <ToastContainer />
       <div className="mx-auto rounded-md max-w-4xl">
         <p className="lg:cursive text-zinc-400 lg:text-2xl text-xl text-center uppercase font-semibold my-3">
           Your Own Password Manager...
@@ -61,10 +100,11 @@ function Manager() {
             </div>
             <div className="flex items-center justify-around w-1/2 gap-0">
               <input
+                ref={passwordref}
                 onChange={handlechange}
                 value={form.password}
                 className="lg:cursive rounded-full  border-[1px] border-green-500 w-full py-1 px-4 bg-zinc-800 text-zinc-300"
-                type="text"
+                type="password"
                 name="password"
                 id=""
                 placeholder="Enter Password."
@@ -119,7 +159,7 @@ function Manager() {
                 {passwordArray.map((item, index) => {
                   return (
                     <tr key={index}>
-                      <td className="text-center min-w-32 text-zinc-400 px-1 py-3">
+                      <td className="text-center min-w-32 text-zinc-400 px-1 py-3 ">
                         <a href={item.site} target="_blank">
                           {item.site}
                         </a>
@@ -127,8 +167,14 @@ function Manager() {
                       <td className="text-center min-w-32 text-zinc-400 px-1 py-3">
                         {item.username}{" "}
                       </td>
-                      <td className="text-center min-w-32 text-zinc-400 px-1 py-3">
+                      <td className="text-center min-w-32 text-zinc-400 px-1 py-3 flex items-center justify-center gap-3">
                         {item.password}{" "}
+                        <PiCopyDuotone
+                          className="copytext text-green-300 text-lg cursor-pointer "
+                          onClick={() => {
+                            copytext(item.password);
+                          }}
+                        />
                       </td>
                     </tr>
                   );
@@ -138,7 +184,7 @@ function Manager() {
           )}
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
