@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { useRef } from "react";
 import { useState } from "react";
-import { MdOutlineContentCopy } from "react-icons/md";
 import { PiCopyDuotone } from "react-icons/pi";
-import { ToastContainer, toast } from "react-toastify";
+import { FaRegEdit } from "react-icons/fa";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { v4 as uuidv4 } from "uuid";
 
 function Manager() {
   const [form, setform] = useState({ site: "", username: "", password: "" });
@@ -19,17 +20,6 @@ function Manager() {
   }, []);
 
   const copytext = (text) => {
-    toast("🦄 Wow so easy!", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
-
     navigator.clipboard.writeText(text);
     // copy text to keyboard
   };
@@ -48,8 +38,22 @@ function Manager() {
 
   const savepassword = () => {
     console.log(form);
-    setpasswordArray([...passwordArray, form]);
-    localStorage.setItem("password", JSON.stringify([...passwordArray, form]));
+    setpasswordArray([...passwordArray, { ...form, id: uuidv4() }]);
+    localStorage.setItem(
+      "password",
+      JSON.stringify([...passwordArray, { ...form, id: uuidv4() }])
+    );
+  };
+
+  const deletepassword = (id) => {
+    console.log("deleted pasword with id ", id);
+    setpasswordArray(passwordArray.filter((item) => item.id != id));
+  };
+  const editpassword = (id) => {
+    console.log("edited pasword with id ", id);
+    // console.log(form);
+    // setpasswordArray([...passwordArray, { ...form, id: uuidv4() }]);
+    // localStorage.setItem("password", JSON.stringify([...passwordArray, form]));
   };
   const handlechange = (e) => {
     setform({ ...form, [e.target.name]: e.target.value });
@@ -57,21 +61,6 @@ function Manager() {
 
   return (
     <>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        transition="Bounce"
-      />
-      {/* Same as */}
-      <ToastContainer />
       <div className="mx-auto rounded-md max-w-4xl">
         <p className="lg:cursive text-zinc-400 lg:text-2xl text-xl text-center uppercase font-semibold my-3">
           Your Own Password Manager...
@@ -124,14 +113,14 @@ function Manager() {
           <div className="w-full flex justify-center items-center">
             <button
               onClick={() => savepassword()}
-              className="uppercase text-white border-[1.8px] border-zinc-500 py-1 px-1 rounded-xl flex justify-center items-center gap-2 hover:text-zinc-500 hover:border-zinc-200 transition-all duration-[.75s] ease-in-out"
+              className="uppercase text-white border-[1.8px] border-zinc-500 py-1 px-3 lg:mt-4 rounded-xl flex justify-center items-center gap-2 hover:text-zinc-500 hover:border-zinc-200 transition-all duration-[.75s] ease-in-out"
             >
               <lord-icon
                 src="https://cdn.lordicon.com/jgnvfzqg.json"
                 trigger="hover"
                 colors="primary:#16c72e"
               ></lord-icon>
-              Add Password
+              Save
             </button>
           </div>
         </div>
@@ -152,6 +141,7 @@ function Manager() {
                   <th className="py-2">Site</th>
                   <th className="py-2">Username</th>
                   <th className="py-2">Password</th>
+                  <th className="py-2">Actions</th>
                 </tr>
               </thead>
 
@@ -159,15 +149,15 @@ function Manager() {
                 {passwordArray.map((item, index) => {
                   return (
                     <tr key={index}>
-                      <td className="text-center min-w-32 text-zinc-400 px-1 py-3 ">
+                      <td className="text-center min-w-32 text-zinc-400 px-1 py-4 ">
                         <a href={item.site} target="_blank">
                           {item.site}
                         </a>
                       </td>
-                      <td className="text-center min-w-32 text-zinc-400 px-1 py-3">
+                      <td className="text-center min-w-32 text-zinc-400 px-1 py-4">
                         {item.username}{" "}
                       </td>
-                      <td className="text-center min-w-32 text-zinc-400 px-1 py-3 flex items-center justify-center gap-3">
+                      <td className="text-center min-w-32 text-zinc-400 px-1 py-4 flex items-center justify-center gap-3">
                         {item.password}{" "}
                         <PiCopyDuotone
                           className="copytext text-green-300 text-lg cursor-pointer "
@@ -175,6 +165,20 @@ function Manager() {
                             copytext(item.password);
                           }}
                         />
+                      </td>
+                      <td className="text-center min-w-32 text-zinc-400 px-1 py-4 cursor-pointer ">
+                        <span className="flex items-center justify-center gap-2">
+                          <FaRegEdit
+                            onClick={() => {
+                              editpassword(item.id);
+                            }}
+                          />
+                          <RiDeleteBin6Line
+                            onClick={() => {
+                              deletepassword(item.id);
+                            }}
+                          />
+                        </span>
                       </td>
                     </tr>
                   );
