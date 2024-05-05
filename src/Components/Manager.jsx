@@ -42,21 +42,25 @@ function Manager() {
     localStorage.setItem(
       "passwords",
       JSON.stringify([...passwordArray, { ...form, id: uuidv4() }])
-    );
-    // this line stores password MdLocalLaundryService, even after refresh
+    ); // this line stores password in local storage, even after refresh
+    setform({ site: "", username: "", password: "" }); // after saving, input field cleared
   };
 
   const deletepassword = (id) => {
     console.log("deleted pasword with id ", id);
-    setpasswordArray(passwordArray.filter((item) => item.id != id));
-    // localStorage.setItem(
-    //   "passwords",
-    //   JSON.stringify([...passwordArray, { ...form, id: uuidv4() }])
-    // );
+    let c = confirm("Do you really want to Delete the Password ?");
+    if (c) {
+      setpasswordArray(passwordArray.filter((item) => item.id != id));
+      // localStorage.setItem(
+      //   "passwords",
+      //   JSON.stringify([...passwordArray, { ...form, id: uuidv4() }])
+      // );
+    }
   };
   const editpassword = (id) => {
     console.log("edited pasword with id ", id);
-    setform(passwordArray.filter((i) => i.id == id)[0]);
+    setform(passwordArray.filter((i) => i.id === id)[0]);
+    setpasswordArray(passwordArray.filter((item) => item.id !== id));
     // console.log(form);
     // setpasswordArray([...passwordArray, { ...form, id: uuidv4() }]);
     // localStorage.setItem("password", JSON.stringify([...passwordArray, form]));
