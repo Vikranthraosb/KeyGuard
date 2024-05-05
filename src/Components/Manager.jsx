@@ -213,4 +213,6 @@ function Manager() {
   );
 }
 
+// local storage is working fine, leaving it here .
+// video source at : https://youtu.be/sgNZcK8QIyc?si=4hm2RR-HZBGbXst3
 export default Manager;
