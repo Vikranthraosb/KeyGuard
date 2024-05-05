@@ -38,12 +38,20 @@ function Manager() {
 
   const savepassword = () => {
     console.log(form);
-    setpasswordArray([...passwordArray, { ...form, id: uuidv4() }]);
-    localStorage.setItem(
-      "passwords",
-      JSON.stringify([...passwordArray, { ...form, id: uuidv4() }])
-    ); // this line stores password in local storage, even after refresh
-    setform({ site: "", username: "", password: "" }); // after saving, input field cleared
+    if (
+      form.site.length > 3 &&
+      form.username.length > 3 &&
+      form.password.length > 3
+    ) {
+      setpasswordArray([...passwordArray, { ...form, id: uuidv4() }]);
+      localStorage.setItem(
+        "passwords",
+        JSON.stringify([...passwordArray, { ...form, id: uuidv4() }])
+      ); // this line stores password in local storage, even after refresh
+      setform({ site: "", username: "", password: "" }); // after saving, input field cleared
+    } else {
+      alert("Min length should be 4 !");
+    }
   };
 
   const deletepassword = (id) => {
@@ -82,7 +90,7 @@ function Manager() {
             className="lg:cursive rounded-full border-[1px] border-green-500 w-full py-1 px-4 bg-zinc-800 text-zinc-300"
             type="text"
             name="site"
-            id=""
+            id="site"
             placeholder="Enter Website URL."
           />
           <div className="flex w-full justify-between gap-6">
@@ -93,7 +101,7 @@ function Manager() {
                 className="lg:cursive rounded-full border-[1px] border-green-600 w-full py-1 px-4 bg-zinc-800 text-zinc-300"
                 type="text"
                 name="username"
-                id=""
+                id="username"
                 placeholder="Enter Username."
               />
             </div>
@@ -105,7 +113,7 @@ function Manager() {
                 className="lg:cursive rounded-full  border-[1px] border-green-500 w-full py-1 px-4 bg-zinc-800 text-zinc-300"
                 type="password"
                 name="password"
-                id=""
+                id="password"
                 placeholder="Enter Password."
               />
               <span className="h-10 flex items-center justify-center">
@@ -145,7 +153,7 @@ function Manager() {
             </div>
           )}
           {passwordArray.length != 0 && (
-            <table className="table-auto w-full overflow-hidden rounded-2xl">
+            <table className="table-auto w-full overflow-hidden rounded-2xl mb-3">
               <thead className=" bg-green-800  bg-opacity-[.25] text-zinc-300">
                 <tr>
                   <th className="py-2">Site</th>
@@ -196,6 +204,9 @@ function Manager() {
               </tbody>
             </table>
           )}
+        </div>
+        <div className="footer md:text-2xl text-center cursive capitalize text-zinc-300 p-3 pb-8">
+          -Vikranth
         </div>
       </div>
     </>
