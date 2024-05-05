@@ -40,17 +40,23 @@ function Manager() {
     console.log(form);
     setpasswordArray([...passwordArray, { ...form, id: uuidv4() }]);
     localStorage.setItem(
-      "password",
+      "passwords",
       JSON.stringify([...passwordArray, { ...form, id: uuidv4() }])
     );
+    // this line stores password MdLocalLaundryService, even after refresh
   };
 
   const deletepassword = (id) => {
     console.log("deleted pasword with id ", id);
     setpasswordArray(passwordArray.filter((item) => item.id != id));
+    // localStorage.setItem(
+    //   "passwords",
+    //   JSON.stringify([...passwordArray, { ...form, id: uuidv4() }])
+    // );
   };
   const editpassword = (id) => {
     console.log("edited pasword with id ", id);
+    setform(passwordArray.filter((i) => i.id == id)[0]);
     // console.log(form);
     // setpasswordArray([...passwordArray, { ...form, id: uuidv4() }]);
     // localStorage.setItem("password", JSON.stringify([...passwordArray, form]));
