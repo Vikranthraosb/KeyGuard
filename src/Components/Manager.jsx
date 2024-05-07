@@ -43,6 +43,7 @@ function Manager() {
       form.username.length > 3 &&
       form.password.length > 3
     ) {
+      //added condition that accept only if length of strings are greater than 3
       setpasswordArray([...passwordArray, { ...form, id: uuidv4() }]);
       localStorage.setItem(
         "passwords",
@@ -79,6 +80,7 @@ function Manager() {
 
   return (
     <>
+      {/* can use react toastify to use the toast ( special apert messeges to increase ui look.) */}
       <div className="mx-auto rounded-md max-w-4xl">
         <p className="lg:cursive text-zinc-400 lg:text-2xl text-xl text-center uppercase font-semibold my-3">
           Your Own Password Manager...
